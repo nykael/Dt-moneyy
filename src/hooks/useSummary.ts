@@ -1,26 +1,27 @@
-import { useContext } from "react"
-import { TransactionContext } from "../contexts/TransactionsContext"
+import { useContext } from 'react'
+import { TransactionContext } from '../contexts/TransactionsContext'
 
-export function useSummary(){
-    const {transactions} = useContext(TransactionContext)
+export function useSummary() {
+  const { transactions } = useContext(TransactionContext)
 
-    const sumarry = transactions.reduce(
-       (acc, transaction) => {
-           if(transaction.type === 'income') {
-               acc.income += transaction.price
-               acc.total += transaction.price
-           }else {
-               acc.outcome += transaction.price
-               acc.total -= transaction.price
-           }
+  const sumarry = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === 'income') {
+        acc.income += transaction.price
+        acc.total += transaction.price
+      } else {
+        acc.outcome += transaction.price
+        acc.total -= transaction.price
+      }
 
-         return acc;
-       },
-       {
-           income: 0, 
-           outcome: 0, 
-           total: 0
-       })
+      return acc
+    },
+    {
+      income: 0,
+      outcome: 0,
+      total: 0,
+    },
+  )
 
-       return sumarry
+  return sumarry
 }
